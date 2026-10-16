@@ -61,6 +61,19 @@ Todas as rotas, exceto `POST /api/auth/login` e `GET /api/health`, exigem `Autho
 | POST | `/api/promotions/:id/activate` | Ativa o cupom da promoção |
 | DELETE | `/api/promotions/:id/activate` | Desativa o cupom |
 
+## Deploy (Render)
+
+Em produção a API também entrega o front compilado, então tudo roda como **um único Web Service**:
+
+| Campo | Valor |
+| --- | --- |
+| Runtime | Node |
+| Build Command | `npm install --include=dev && npm run build` |
+| Start Command | `npm start` |
+| Variável de ambiente | `JWT_SECRET` = um segredo longo e aleatório |
+
+O `.npmrc` do projeto fixa o registro público do npm (`registry.npmjs.org`), para o `package-lock.json` não depender de registros privados da máquina de quem instalou.
+
 ## Dados
 
 Os dados ficam em memória (`server/src/data/seed.js`) e voltam ao estado inicial a cada reinício da API. Para usar um banco de dados, substitua `server/src/data/store.js` por uma implementação com as mesmas funções; as rotas não precisam mudar.
